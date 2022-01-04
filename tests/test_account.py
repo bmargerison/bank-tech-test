@@ -19,10 +19,11 @@ def test_display_balance(capfd):
     account = Account()
     account.deposit(20)
     account.withdraw(5)
-    account.view_statement
+    account.view_statement()
     statement, err = capfd.readouterr()
-    assert "deposit" in statement
-    assert "withdrawal" in statement
+    print(statement)
+    assert "credit" in statement
+    assert "debit" in statement
     assert "balance" in statement
     assert "£15.00" in statement
 
