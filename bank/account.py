@@ -23,3 +23,4 @@ class Account:
                 print(running_total)
                 running_total -= transaction[1]
                 print(" || £%.2f || £%.2f" %(transaction[1], running_total))
+                
