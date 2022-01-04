@@ -20,11 +20,19 @@ class Account:
 
     def view_statement(self):
         print('credit || debit || balance')
-        running_total = 0
-        for transaction in self.__transactions:
-            if transaction['type'] == 'credit':
-                running_total += transaction['amount']
-                print("£%.2f || || £%.2f" %(transaction['amount'], running_total))
-            elif transaction['type'] == 'debit':
-                running_total -= transaction['amount']
-                print(" || £%.2f || £%.2f" %(transaction['amount'], running_total))
+        transactions = self.__add_balance()
+        for tr in transactions:
+            if tr['type'] == 'credit': 
+                print("£%.2f || || £%.2f" %(tr['amount'], tr['balance']))
+            elif tr['type'] == 'debit': 
+                print(" || £%.2f || £%.2f" %(tr['amount'], tr['balance']))
+
+    def __add_balance(self):
+        balance = 0
+        transactions = []
+        for tr in self.__transactions:
+            if tr['type'] == 'credit': balance += tr['amount']
+            if tr['type'] == 'debit': balance -= tr['amount']
+            tr['balance'] = balance
+            transactions.append(tr)
+        return transactions[::-1]
