@@ -1,3 +1,7 @@
 class Account:
 
-  pass
+    def __init__(self):
+        self.balance = 0.0
+    
+    def deposit(self, amount):
+        self.balance += amount
