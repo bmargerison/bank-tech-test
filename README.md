@@ -24,7 +24,9 @@ date || credit || debit || balance
 10/01/2023 || 1000.00 || || 1000.00
 ```
 
-### User stories
+### Approach
+
+##### User stories
 
 ```
 As a user
@@ -49,3 +51,7 @@ As a user
 So I can see a history of transactions
 I want to be able to see an account statement
 ```
+
+##### Diagram
+
+![](images/UML.png)
