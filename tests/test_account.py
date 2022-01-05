@@ -1,5 +1,6 @@
 from bank.account import Account
 import re
+import pytest
 
 def test_account():
     account = Account()
@@ -35,3 +36,8 @@ def test_display_balance_reverse_order(capfd):
     statement, err = capfd.readouterr()
     assert isinstance(re.search('£15.00.*?\n.*?£20.00', statement), re.Match)
 
+def test_balance_cannot_go_below_nil():
+    account = Account()
+    with pytest.raises(Exception, match='Insufficient funds'):
+        account.withdraw(5)
+    
