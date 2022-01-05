@@ -7,8 +7,7 @@ class Account:
         self.__transactions = []
     
     def deposit(self, amount):
-        if not isinstance(amount, (int, float)): 
-            raise Exception('Must be a number')
+        self.__validate_number(amount)
         self.balance += amount
         self.__transactions.append({
             'type': 'credit',
@@ -16,8 +15,7 @@ class Account:
         })
 
     def withdraw(self, amount):
-        if not isinstance(amount, (int, float)): 
-            raise Exception('Must be a number')
+        self.__validate_number(amount)
         if self.balance < amount: raise Exception('Insufficient funds')
         self.balance -= amount
         self.__transactions.append({
@@ -43,3 +41,7 @@ class Account:
             tr['balance'] = balance
             transactions.append(tr)
         return transactions[::-1]
+
+    def __validate_number(self, number):
+        if not isinstance(number, (int, float)): 
+            raise Exception('Must be a number')
