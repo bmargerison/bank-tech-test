@@ -40,8 +40,7 @@ class Account:
     def view_statement(self):
         """User can view their statement showing transaction history"""
         print('date || credit || debit || balance')
-        transactions = self.__transactions[::-1]
-        for transaction in transactions:
+        for transaction in self.__transactions[::-1]:
             amount = format(transaction['amount'], '.2f')
             balance = format(transaction['balance'], '.2f')
             if transaction['type'] == 'cr':
