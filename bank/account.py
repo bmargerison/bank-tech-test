@@ -41,13 +41,13 @@ class Account:
         """User can view their statement showing transaction history"""
         print('date || credit || debit || balance')
         transactions = self.__transactions[::-1]
-        for trans in transactions:
-            amount = format(trans['amount'], '.2f')
-            balance = format(trans['balance'], '.2f')
-            if trans['type'] == 'cr':
-                print(f"{trans['date']} || {amount} || || {balance}")
-            elif trans['type'] == 'dr':
-                print(f"{trans['date']} || || {amount} || {balance}")
+        for transaction in transactions:
+            amount = format(transaction['amount'], '.2f')
+            balance = format(transaction['balance'], '.2f')
+            if transaction['type'] == 'cr':
+                print(f"{transaction['date']} || {amount} || || {balance}")
+            elif transaction['type'] == 'dr':
+                print(f"{transaction['date']} || || {amount} || {balance}")
 
 def validate_number(number):
     """Validates that a deposit or withdrawal is an integer or float"""
