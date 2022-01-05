@@ -11,7 +11,7 @@ class Account:
         self.__validate_number(amount)
         self.balance += amount
         self.__transactions.append({
-            'type': 'credit',
+            'type': 'cr',
             'amount': amount,
             'date': datetime.datetime.now().strftime('%d/%m/%Y')
         })
@@ -21,7 +21,7 @@ class Account:
         if self.balance < amount: raise Exception('Insufficient funds')
         self.balance -= amount
         self.__transactions.append({
-            'type': 'debit',
+            'type': 'dr',
             'amount': amount,
             'date': datetime.datetime.now().strftime('%d/%m/%Y')
         })
@@ -30,17 +30,16 @@ class Account:
         print('date || credit || debit || balance')
         transactions = self.__add_balance()
         for tr in transactions:
-            if tr['type'] == 'credit': 
-                print("%s || £%.2f || || £%.2f" %(tr['date'], tr['amount'], tr['balance']))
-            elif tr['type'] == 'debit': 
-                print("%s || || £%.2f || £%.2f" %(tr['date'], tr['amount'], tr['balance']))
+            print_tr = (tr['date'], tr['amount'], tr['balance'])
+            if tr['type'] == 'cr': print("%s || £%.2f || || £%.2f" %print_tr)
+            elif tr['type'] == 'dr': print("%s || || £%.2f || £%.2f" %print_tr)
 
     def __add_balance(self):
         balance = 0
         transactions = []
         for tr in self.__transactions:
-            if tr['type'] == 'credit': balance += tr['amount']
-            if tr['type'] == 'debit': balance -= tr['amount']
+            if tr['type'] == 'cr': balance += tr['amount']
+            if tr['type'] == 'dr': balance -= tr['amount']
             tr['balance'] = balance
             transactions.append(tr)
         return transactions[::-1]
