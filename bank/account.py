@@ -16,6 +16,8 @@ class Account:
         })
 
     def withdraw(self, amount):
+        if not isinstance(amount, (int, float)): 
+            raise Exception('Must be a number')
         if self.balance < amount: raise Exception('Insufficient funds')
         self.balance -= amount
         self.__transactions.append({

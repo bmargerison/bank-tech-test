@@ -45,3 +45,8 @@ def test_deposit_must_be_int_or_float():
     account = Account()
     with pytest.raises(Exception, match='Must be a number'):
         account.deposit('money')
+
+def test_withdrawal_must_be_int_or_float():
+    account = Account()
+    with pytest.raises(Exception, match='Must be a number'):
+        account.withdraw('money')
