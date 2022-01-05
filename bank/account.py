@@ -12,6 +12,7 @@ class Account:
         })
 
     def withdraw(self, amount):
+        if self.balance < amount: raise Exception('Insufficient funds')
         self.balance -= amount
         self.__transactions.append({
             'type': 'debit',
