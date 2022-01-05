@@ -1,3 +1,5 @@
+import re
+
 class Account:
 
     def __init__(self):
@@ -5,6 +7,8 @@ class Account:
         self.__transactions = []
     
     def deposit(self, amount):
+        if not isinstance(amount, (int, float)): 
+            raise Exception('Must be a number')
         self.balance += amount
         self.__transactions.append({
             'type': 'credit',
