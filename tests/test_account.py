@@ -28,6 +28,16 @@ def test_display_balance(capfd):
     assert "balance" in statement
     assert "£15.00" in statement
 
+def test_display_dates(capfd):
+    account = Account()
+    account.deposit(20)
+    account.withdraw(5)
+    account.view_statement()
+    statement, err = capfd.readouterr()
+    validator = '^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$'
+    assert "date" in statement
+    assert isinstance(re.search(validator, statement), re.Match)
+
 def test_display_balance_reverse_order(capfd):
     account = Account()
     account.deposit(20)
