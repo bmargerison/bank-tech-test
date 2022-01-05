@@ -2,6 +2,7 @@
 Testing the Transaction class
 """
 
+import pytest
 from bank.transaction import Transaction
 
 def test_deposit_must_be_int_or_float():

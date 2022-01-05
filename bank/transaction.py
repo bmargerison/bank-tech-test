@@ -5,9 +5,11 @@ Creates a transaction instance for storage on a user's account
 import datetime
 
 class Transaction:
+    """Create new transaction and validates"""
 
-    def __init__(self, type, amount, balance):
-        self.type = type
+    def __init__(self, tr_type, amount, balance):
+        """Transaction type, amount, date and balance"""
+        self.tr_type = tr_type
         self.amount = amount
         self.date = datetime.datetime.now().strftime('%d/%m/%Y')
         self.balance = balance

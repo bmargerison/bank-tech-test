@@ -11,27 +11,27 @@ class Account:
     def __init__(self):
         """Account instance stores current balance and transaction history"""
         self.balance = 0.0
-        self.__transactions = []
+        self.transactions = []
 
     def deposit(self, amount):
         """User can despoit funds to their account"""
         self.balance += amount
-        self.__transactions.append(Transaction('cr', amount, self.balance))
+        self.transactions.append(Transaction('cr', amount, self.balance))
 
     def withdraw(self, amount):
         """User can withdraw funds from their account"""
         if self.balance < amount:
             raise Exception('Insufficient funds')
         self.balance -= amount
-        self.__transactions.append(Transaction('dr', amount, self.balance))
+        self.transactions.append(Transaction('dr', amount, self.balance))
 
     def view_statement(self):
         """User can view their statement showing transaction history"""
         print('date || credit || debit || balance')
-        for transaction in self.__transactions[::-1]:
+        for transaction in self.transactions[::-1]:
             amount = format(transaction.amount, '.2f')
             balance = format(transaction.balance, '.2f')
-            if transaction.type == 'cr':
+            if transaction.tr_type == 'cr':
                 print(f"{transaction.date} || {amount} || || {balance}")
-            elif transaction.type == 'dr':
+            elif transaction.tr_type == 'dr':
                 print(f"{transaction.date} || || {amount} || {balance}")

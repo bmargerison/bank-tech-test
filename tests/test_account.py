@@ -3,6 +3,7 @@ Testing the Account() class
 """
 
 import re
+from unittest.mock import patch
 import pytest
 from bank.account import Account
 
@@ -15,9 +16,12 @@ def fixture_account():
 @pytest.fixture(name="account_deposit")
 def fixture_account_deposit():
     """Creates an instance of Account class and deposits funds"""
+    mock = patch('bank.transaction.Transaction.__init__', return_value = None)
+    mock.start()
     account = Account()
     account.deposit(20)
     yield account
+    mock.stop()
 
 @pytest.fixture(name="account_withdraw")
 def fixture_account_withdraw():
