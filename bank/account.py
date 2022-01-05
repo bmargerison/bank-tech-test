@@ -20,8 +20,6 @@ class Account:
 
     def withdraw(self, amount):
         """User can withdraw funds from their account"""
-        if self.balance < amount:
-            raise Exception('Insufficient funds')
         self.balance -= amount
         self.transactions.append(Transaction('dr', amount, self.balance))
 

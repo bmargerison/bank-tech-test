@@ -13,9 +13,15 @@ class Transaction:
         self.amount = amount
         self.date = datetime.datetime.now().strftime('%d/%m/%Y')
         self.balance = balance
-        self.validate_number(amount)
+        self.validate_number()
+        self.validate_balance()
 
-    def validate_number(self, number):
+    def validate_number(self):
         """Validates that a deposit or withdrawal is an integer or float"""
-        if not isinstance(number, (int, float)):
+        if not isinstance(self.amount, (int, float)):
             raise Exception('Must be a number')
+
+    def validate_balance(self):
+        """Validates that the user has sufficient funds"""
+        if self.balance < self.amount:
+            raise Exception('Insufficient funds')
