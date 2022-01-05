@@ -41,3 +41,7 @@ def test_balance_cannot_go_below_nil():
     with pytest.raises(Exception, match='Insufficient funds'):
         account.withdraw(5)
     
+def test_deposit_must_be_int_or_float():
+    account = Account()
+    with pytest.raises(Exception, match='Must be a number'):
+        account.deposit('money')
