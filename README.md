@@ -39,6 +39,12 @@ pip install pytest-cov
 pytest --cov=. tests/
 ```
 
+Pylint was used to check code quality. You can run it by navigating to the parent directory and running:
+```
+pip install pylint
+pylint bank-tech-test
+```
+
 ![](images/CLI.png)
 
 ### Approach
@@ -75,7 +81,7 @@ I want to be able to see an account statement
 
 I wanted to start with user stories to break the task down into its smallest components and ensure I am only implementing the features required. I than drew a UML diagram to ensure that my approach would work in order to avoid the potential for extensive refactoring later.
 
-I think its beneficial to work towards a skeleton of the features I'm looking to build, so I can understand if the bigger picture will fit together. To this end, I wanted to look at all user stories first before moving on to refactoring the code and tests, and looking at edge cases.
+I think its beneficial to work towards a skeleton of the features I'm looking to build, so I can understand if the bigger picture will fit together. To this end, I wanted to look at all user stories first before moving on to refactoring the code, refactoring tests, looking at edge cases and finally using a linter.
 
 The main thinking points from the task:
 * Transactions from newest to oldest: I overcomplicated this issue by trying to create a new running total on each print out of the statement (which required additional work due to the reverse order), before realising at the refactor stage that the best solution was to simply add the balance to the list of transactions when it is created as it will not change.
