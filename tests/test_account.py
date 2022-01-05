@@ -26,19 +26,21 @@ def test_deposit(account_deposit):
 def test_withdraw(account_withdraw):
     assert account_withdraw.balance == 15
 
-def test_display_balance(capfd, account_withdraw):
+@pytest.mark.parametrize("text", ["credit",
+                                "debit", 
+                                "balance",
+                                "£15.00",
+                                "date"])
+
+def test_display_balance(capfd, account_withdraw, text):
     account_withdraw.view_statement()
     statement, err = capfd.readouterr()
-    assert "credit" in statement
-    assert "debit" in statement
-    assert "balance" in statement
-    assert "£15.00" in statement
+    assert text in statement
 
-def test_display_dates(capfd, account_withdraw):
+def test_date_format(capfd, account_withdraw):
     account_withdraw.view_statement()
     statement, err = capfd.readouterr()
     pattern = '.*?(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}.*?'
-    assert "date" in statement
     assert isinstance(re.search(pattern, statement), re.Match)
 
 def test_display_balance_reverse_order(capfd, account_withdraw):
