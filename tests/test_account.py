@@ -34,9 +34,9 @@ def test_display_dates(capfd):
     account.withdraw(5)
     account.view_statement()
     statement, err = capfd.readouterr()
-    validator = '^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$'
+    pattern = '.*?(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}.*?'
     assert "date" in statement
-    assert isinstance(re.search(validator, statement), re.Match)
+    assert isinstance(re.search(pattern, statement), re.Match)
 
 def test_display_balance_reverse_order(capfd):
     account = Account()

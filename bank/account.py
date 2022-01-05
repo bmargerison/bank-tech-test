@@ -1,4 +1,5 @@
 import re
+import datetime
 
 class Account:
 
@@ -11,7 +12,8 @@ class Account:
         self.balance += amount
         self.__transactions.append({
             'type': 'credit',
-            'amount': amount
+            'amount': amount,
+            'date': datetime.datetime.now().strftime('%d/%m/%Y')
         })
 
     def withdraw(self, amount):
@@ -20,17 +22,18 @@ class Account:
         self.balance -= amount
         self.__transactions.append({
             'type': 'debit',
-            'amount': amount
+            'amount': amount,
+            'date': datetime.datetime.now().strftime('%d/%m/%Y')
         })
 
     def view_statement(self):
-        print('credit || debit || balance')
+        print('date || credit || debit || balance')
         transactions = self.__add_balance()
         for tr in transactions:
             if tr['type'] == 'credit': 
-                print("£%.2f || || £%.2f" %(tr['amount'], tr['balance']))
+                print("%s || £%.2f || || £%.2f" %(tr['date'], tr['amount'], tr['balance']))
             elif tr['type'] == 'debit': 
-                print(" || £%.2f || £%.2f" %(tr['amount'], tr['balance']))
+                print("%s || || £%.2f || £%.2f" %(tr['date'], tr['amount'], tr['balance']))
 
     def __add_balance(self):
         balance = 0
